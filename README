@@ -1,15 +1,15 @@
 
-This is designed to be run on the strw desktops allowing direct access to the Maildir, but may be tweakable to run elsewhere. The compiler should send a 'fresh' email to the list requesting suggestioms and not replay all to the last agenda: the preprints from the previous week could confuse the code.
+This is designed to be run on the strw desktops allowing direct access to the Maildir, but may be tweakable to run elsewhere. If sending a reminder email, the compiler should send a 'fresh' email to the list requesting suggestions and not reply all to the last agenda: the preprints from the previous week could confuse the code.
 
-1) Create 'preprints' subfolder of your sterrewacht email (via roundcube). This should create a new directory at $HOME'/Maildir/.INBOX.preprints'
+1) Create 'preprints' subfolder of your sterrewacht email (via roundcube). This should create a new directory at $HOME'/Maildir/.INBOX.preprints' (via roundcube, click the cog in the bottom left and select 'Manage folders', click the plus icon in the new frame to add a folder, name it 'preprints', set 'Inbox' as the parent folder and save.)
 
-2) Copy that week's preprint suggestions into this subfolder
+2) Direct that week's preprint suggestions into this subfolder.
 
 3) run 'python preprint_list.py' to compile the preprint list including attendees, the relevant metadata for each suggested paper. The preprints are ordered by which receive the highest to lowest 'score' from that week's suggestions, and the suggestees are listed in order from highest to lowest score contribution. This will print the list to a terminal, but can be redirected to a file (i.e. python preprint_list.py > list.txt)
 
-4) Use this list to 'easily' compile the preprint agenda (possibly will automatically generate suggested agendas in the future).
+4) Use this list to 'easily' compile the preprint agenda (could automatically generate suggested agendas in the future).
 
-The code uses regex to extract the suggestions from each email address based on the arxiv code provided in hyperlinks or copied from the arxiv mailing, and the order they appear (assuming first to last -> highest to lowest priority). No one has managed to brk this in my experience...
+The code uses regex to extract the suggestions from each email address based on the arxiv code provided in hyperlinks or copied from the arxiv mailing, and the order they appear (assuming first to last -> highest to lowest priority). No one has managed to break this in my experience...
 
 Using the paper rank R=[1,N], the score each person provides is (N-R+1)**WEIGHT normalised by the sum of these values for all papers (so each person contributes the same total score budget). The WEIGHT exponent is 1 by default but can be set as an optinal argument 'python preprint_list 2.0'. Higher than 1 givse higher weighting to first choices, while lower than one gives a more distributed weighting. setting WEIGHT to 0 gives each person's suggestions equal weight.
 
