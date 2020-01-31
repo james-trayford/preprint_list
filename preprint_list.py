@@ -46,12 +46,12 @@ for path in glob.glob(os.environ['HOME'] + "/Maildir/.INBOX.preprints/*/*"):
     # print email
     name = email.split('From: ')[1].split('\n')[0]
     # print 'ID: ', name
-    suggs = re.findall('( arXiv:19[0-9]{2}\.[0-9]{5} |^arXiv:19[0-9]{2}\.[0-9]{5})', email, flags=re.MULTILINE)
-    suggs2 = re.findall('( http\S+19[0-9]{2}\.[0-9]{5}|^http\S+19[0-9]{2}\.[0-9]{5})', email, flags=re.MULTILINE)
-    suggs3 = re.findall('(19[0-9]{2}\.[0-9]{5})', email, flags=re.MULTILINE)
+    suggs = re.findall('( arXiv:20[0-9]{2}\.[0-9]{5} |^arXiv:20[0-9]{2}\.[0-9]{5})', email, flags=re.MULTILINE)
+    suggs2 = re.findall('( http\S+20[0-9]{2}\.[0-9]{5}|^http\S+20[0-9]{2}\.[0-9]{5})', email, flags=re.MULTILINE)
+    suggs3 = re.findall('(20[0-9]{2}\.[0-9]{5})', email, flags=re.MULTILINE)
     sugg  = '\n'.join(suggs+suggs2+suggs3)
     print suggs3
-    suggunq = list(f7(np.array(re.findall('19[0-9]{2}\.[0-9]{5}', sugg, flags=re.MULTILINE))))
+    suggunq = list(f7(np.array(re.findall('20[0-9]{2}\.[0-9]{5}', sugg, flags=re.MULTILINE))))
     
     ranks   = (np.arange(len(suggunq))+1.)**WEIGHT
     score   = ranks[::-1]/((ranks[::-1].sum()))
